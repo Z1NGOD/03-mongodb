@@ -17,6 +17,6 @@ const login = async (req, res, next) => {
     res.status(401).json({ message: "Password is not valid" });
   }
   const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1h" });
-  res.status(200).json({ token, user });
+  res.status(200).json({ token, user: { email, subscription: user.subscription } });
 };
 module.exports = login;
