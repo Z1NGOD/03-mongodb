@@ -4,7 +4,8 @@ const bcrypt = require("bcrypt");
 const registration = async (req, res, next) => {
   try {
     req.body.password = await bcrypt.hash(req.body.password, 10);
-    const user = await User.create(req.body);
+    const { id } = await User.create(req.body);
+    const user = await User.findById(id, { _id: 0, password: 0, __v: 0 });
     res.status(201).json(user);
   } catch (error) {
     if (error.name === "ValidationError") {
