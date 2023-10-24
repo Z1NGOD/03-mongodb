@@ -5,7 +5,6 @@ const wrapper = require("../../helpers/controllerWrapper");
 const auth = require("../../middlewares/authorizationMiddleware");
 
 router.post("/logout", wrapper(auth), wrapper(controller.logout));
-router.get("/getContacts", wrapper(auth), wrapper(controller.getContacts));
 router.get("/current", wrapper(auth), wrapper(controller.getUserInfo));
 
 module.exports = router;
