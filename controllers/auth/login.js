@@ -1,9 +1,9 @@
-const users = require("../../models/users");
+const User = require("../../models/users");
 const bcrypt = require("bcrypt");
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const user = await users.findUser({ email });
+  const user = await User.findOne({ email });
 
   if (!user) {
     res.status(401).json({ message: "Email is not valid" });

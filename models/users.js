@@ -1,10 +1,22 @@
 const { model } = require("mongoose");
-const schema = require("../schemas/usersSchema");
-const User = model("user", schema);
-const addUser = async (body) => {
-  return User.create(body);
-};
-const findUser = async (email) => {
-  return User.findOne(email);
-};
-module.exports = { addUser, findUser };
+const { Schema } = require("mongoose");
+const usersSchema = new Schema({
+  email: {
+    type: String,
+    required: [true, "Email is required"],
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: [true, "Set password for user"],
+  },
+  subscription: {
+    type: String,
+    enum: ["starter", "pro", "business"],
+    default: "starter",
+  },
+  token: String,
+});
+
+const User = model("user", usersSchema);
+module.exports = User;

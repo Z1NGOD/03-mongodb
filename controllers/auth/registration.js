@@ -1,10 +1,10 @@
-const users = require("../../models/users");
+const User = require("../../models/users");
 const bcrypt = require("bcrypt");
 
 const registration = async (req, res, next) => {
   try {
     req.body.password = await bcrypt.hash(req.body.password, 10);
-    const user = await users.addUser(req.body);
+    const user = await User.create(req.body);
     res.status(201).json(user);
   } catch (error) {
     if (error.name === "ValidationError") {
