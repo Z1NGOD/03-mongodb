@@ -2,7 +2,6 @@ const Contact = require("../../models/contacts");
 const getAll = async (req, res, next) => {
   try {
     const { _id: owner } = req.user;
-    console.log(owner);
     const { page = 1, limit = 10 } = req.query;
     const skip = (page - 1) * limit;
     const allContacts = await Contact.find({ owner }, "-createAt -updateAt", {

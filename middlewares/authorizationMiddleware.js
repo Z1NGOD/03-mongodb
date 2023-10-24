@@ -16,7 +16,6 @@ const authorization = async (req, res, next) => {
     const { id } = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(id, { password: 0, __v: 0 });
     req.user = user;
-    console.log(user);
   } catch (error) {
     if (error.name === "TokenExpiredError" || error.name === "JsonTokenError") {
       res.status(401).json({ message: "Token is expired" });
