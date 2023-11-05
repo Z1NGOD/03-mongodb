@@ -1,8 +1,13 @@
 const User = require("../../models/users");
 const bcrypt = require("bcrypt");
+const gravatar = require("gravatar");
 
 const registration = async (req, res, next) => {
   try {
+    req.body.avatarURL = await gravatar.url(req.body.email, {
+      protocol: "https",
+      s: "250",
+    });
     req.body.password = await bcrypt.hash(req.body.password, 10);
     const { id } = await User.create(req.body);
     const user = await User.findById(id, { _id: 0, password: 0, __v: 0 });
