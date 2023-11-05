@@ -9,9 +9,9 @@ router.post("/logout", wrapper(auth), wrapper(controller.logout));
 router.get("/current", wrapper(auth), wrapper(controller.getUserInfo));
 router.patch(
   "/avatars",
-  wrapper(auth),
   uploadMiddleware.single("avatar"),
   wrapper(controller.updateAvatar)
 );
+router.post("/verify", wrapper(controller.verify));
 
 module.exports = router;

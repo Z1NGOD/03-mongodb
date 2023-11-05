@@ -1,3 +1,5 @@
 const registration = require("./registration");
 const login = require("./login");
-module.exports = { registration, login };
+const verify = require("./verify");
+
+module.exports = { registration, login, verify };
